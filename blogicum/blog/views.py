@@ -52,8 +52,13 @@ def index(request):
 
 def category_posts(request, category_slug):
     template = 'blog/category.html'
-    filtered_posts = [post for post in posts if post['category'] == category_slug]
-    context = {'category_list': filtered_posts, 'category_slug': category_slug}
+    filtered_posts = [
+        post for post in posts if post['category'] == category_slug
+    ]
+    context = {
+        'category_list': filtered_posts,
+        'category_slug': category_slug
+    }
     return render(request, template, context)
 
 
