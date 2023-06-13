@@ -43,17 +43,20 @@ posts = [
     },
 ]
 
+
 def index(request):
     template = 'blog/index.html'
     context = {'posts_list': posts}
     return render(request, template, context)
+
 
 def category_posts(request, category_slug):
     template = 'blog/category.html'
     filtered_posts = [post for post in posts if post['category'] == category_slug]
     context = {'category_list': filtered_posts, 'category_slug': category_slug}
     return render(request, template, context)
-    
+
+
 def post_detail(request, id):
     template = 'blog/detail.html'
     context = {'post': posts[id]}
