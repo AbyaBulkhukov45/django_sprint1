@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import Http404
+from django.shortcuts import get_object_or_404
 
 posts = [
     {
@@ -52,17 +54,18 @@ def index(request):
 
 def category_posts(request, category_slug):
     template = 'blog/category.html'
-    filtered_posts = [
-        post for post in posts if post['category'] == category_slug
-    ]
     context = {
-        'category_list': filtered_posts,
         'category_slug': category_slug
     }
     return render(request, template, context)
 
 
 def post_detail(request, id):
+    try:
+        post = posts[id]
+    except IndexError:
+        raise Http404("Post does not exist")
+    
     template = 'blog/detail.html'
     context = {'post': posts[id]}
     return render(request, template, context)
