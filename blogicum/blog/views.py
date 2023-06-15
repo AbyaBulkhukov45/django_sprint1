@@ -65,7 +65,6 @@ def post_detail(request, id):
         post = posts[id]
     except IndexError:
         raise Http404("Post does not exist")
-    
     template = 'blog/detail.html'
-    context = {'post': posts[id]}
+    context = {'post': post}
     return render(request, template, context)
